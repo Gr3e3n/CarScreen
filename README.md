@@ -44,7 +44,7 @@
 
 ---
 ## 📹 演示视频
-<a href="#" onclick="window.open('https://gr3e3n.github.io/CarSafety/video-demo.html', '_blank'); return false;">📹 在线观看视频</a>
+[在线观看视频](https://gr3e3n.github.io/CarSafety/video-demo.html)
 
 
 
