@@ -45,10 +45,10 @@
 ---
 ## 演示
 
-演示视频：
-<video width="100%" controls>
-  <source src="demo/demo.mp4" type="video/mp4">
-</video>
+
+[![点击观看演示视频](demo/demo.png)](demo/demo.mp4)
+
+*👆 点击图片观看视频*
 
 ---
 ## 系统架构
