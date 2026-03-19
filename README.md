@@ -43,12 +43,13 @@
 | 🔌 标准接口接入 | CarExt API 接入，严格遵循 ECARX 标准文档安全审核规范 |
 
 ---
-## 演示
+## 📹 演示视频
 
-<video src="https://github.com/Gr3e3n/CarSafety/raw/main/demo/demo.mp4" controls width="100%">
-  您的浏览器不支持视频标签。
-</video>
-<p>普通段落文本 - 看看这个能不能显示</p>
+[在线观看视频] (https://gr3e3n.github.io/CarSafety/video-demo.html)
+
+*👆 点击图片在线观看演示视频*
+
+
 
 
 ---
