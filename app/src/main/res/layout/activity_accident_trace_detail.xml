@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_detail_gradient">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- 事件基本信息 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="事故信息"
+                android:textColor="#94A3B8"
+                android:textSize="11sp"
+                android:textAllCaps="true"
+                android:letterSpacing="0.08" />
+            <TextView
+                android:id="@+id/tvHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="#1E293B"
+                android:textSize="13sp"
+                android:lineSpacingMultiplier="1.5" />
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+            android:background="#E8ECF2" android:layout_marginTop="12dp" />
+
+
+        <!-- 可解释责任指标 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="16dp"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="责任分析指标"
+                android:textColor="#94A3B8"
+                android:textSize="11sp"
+                android:textAllCaps="true"
+                android:letterSpacing="0.08" />
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginTop="12dp">
+                <LinearLayout android:layout_width="0dp" android:layout_height="76dp"
+                    android:layout_weight="1" android:orientation="vertical" android:gravity="center"
+                    android:background="#FFF8F2" android:layout_marginEnd="5dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="反应时间" android:textColor="#94A3B8" android:textSize="10sp" />
+                    <TextView android:id="@+id/tvReactionTime" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textColor="#F5A623"
+                        android:textStyle="bold" android:textSize="18sp" />
+                    <TextView android:id="@+id/tvReactionTimeLabel" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textSize="9sp" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_height="76dp"
+                    android:layout_weight="1" android:orientation="vertical" android:gravity="center"
+                    android:background="#F0F5FF" android:layout_marginEnd="5dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="制动上升" android:textColor="#94A3B8" android:textSize="10sp" />
+                    <TextView android:id="@+id/tvBrakeRiseTime" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textColor="#4A90E2"
+                        android:textStyle="bold" android:textSize="18sp" />
+                    <TextView android:id="@+id/tvBrakeRiseLabel" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textSize="9sp" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_height="76dp"
+                    android:layout_weight="1" android:orientation="vertical" android:gravity="center"
+                    android:background="#F5F0FF">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="峰值减速" android:textColor="#94A3B8" android:textSize="10sp" />
+                    <TextView android:id="@+id/tvMaxDecel" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textColor="#9B51E0"
+                        android:textStyle="bold" android:textSize="18sp" />
+                    <TextView android:id="@+id/tvMaxDecelLabel" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textSize="9sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginTop="6dp">
+                <LinearLayout android:layout_width="0dp" android:layout_height="76dp"
+                    android:layout_weight="1" android:orientation="vertical" android:gravity="center"
+                    android:background="#EDFFF8" android:layout_marginEnd="5dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="AEB 介入" android:textColor="#94A3B8" android:textSize="10sp" />
+                    <TextView android:id="@+id/tvAebDelay" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textColor="#2DC7A0"
+                        android:textStyle="bold" android:textSize="16sp" />
+                    <TextView android:id="@+id/tvAebLabel" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textSize="9sp" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_height="76dp"
+                    android:layout_weight="1" android:orientation="vertical" android:gravity="center"
+                    android:background="#FFF2F2" android:layout_marginEnd="5dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="制动时 TTC" android:textColor="#94A3B8" android:textSize="10sp" />
+                    <TextView android:id="@+id/tvTtc" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textColor="#E53935"
+                        android:textStyle="bold" android:textSize="16sp" />
+                    <TextView android:id="@+id/tvTtcLabel" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textSize="9sp" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_height="76dp"
+                    android:layout_weight="1" android:orientation="vertical" android:gravity="center"
+                    android:background="#F8F9FA">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="制动有效性" android:textColor="#94A3B8" android:textSize="10sp" />
+                    <TextView android:id="@+id/tvBrakeEffective" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textStyle="bold" android:textSize="16sp" />
+                    <TextView android:id="@+id/tvBrakeEffectiveLabel" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:textSize="9sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView android:id="@+id/tvDriverAnalysis"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:textColor="#64748B"
+                android:textSize="12sp" android:lineSpacingMultiplier="1.6" />
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+            android:background="#E8ECF2" android:layout_marginTop="12dp" />
+
+
+        <!-- 责任界定 + 进度条 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="16dp"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="责任界定"
+                android:textColor="#94A3B8"
+                android:textSize="11sp"
+                android:textAllCaps="true"
+                android:letterSpacing="0.08" />
+
+            <TextView android:id="@+id/tvAiInference"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" android:textColor="#1E293B"
+                android:textSize="13sp" android:textStyle="bold" />
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginTop="12dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:text="驾驶员"
+                    android:textColor="#F5A623" android:textSize="11sp" android:gravity="center" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:text="系统"
+                    android:textColor="#4A90E2" android:textSize="11sp" android:gravity="center" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:text="环境"
+                    android:textColor="#2DC7A0" android:textSize="11sp" android:gravity="center" />
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="14dp"
+                android:orientation="horizontal" android:layout_marginTop="5dp">
+                <View android:id="@+id/barDriver" android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="50"
+                    android:background="#F5A623" />
+                <View android:id="@+id/barSystem" android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="30"
+                    android:background="#4A90E2" />
+                <View android:id="@+id/barEnv" android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="20"
+                    android:background="#2DC7A0" />
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginTop="4dp">
+                <TextView android:id="@+id/tvBarDriverPct" android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:textColor="#F5A623" android:textStyle="bold"
+                    android:textSize="12sp" android:gravity="center" />
+                <TextView android:id="@+id/tvBarSystemPct" android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:textColor="#4A90E2" android:textStyle="bold"
+                    android:textSize="12sp" android:gravity="center" />
+                <TextView android:id="@+id/tvBarEnvPct" android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:textColor="#2DC7A0" android:textStyle="bold"
+                    android:textSize="12sp" android:gravity="center" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+            android:background="#E8ECF2" android:layout_marginTop="12dp" />
+
+
+        <!-- 关键数据（遥测） -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="16dp"
+            android:layout_marginTop="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="关键数据（事故前 10 秒 · 20Hz）"
+                android:textColor="#94A3B8"
+                android:textSize="11sp"
+                android:textAllCaps="true"
+                android:letterSpacing="0.06" />
+            <TextView
+                android:id="@+id/tvTelemetry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="#475569"
+                android:textSize="11sp"
+                android:typeface="monospace"
+                android:lineSpacingMultiplier="1.5" />
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+            android:background="#E8ECF2" android:layout_marginTop="12dp" />
+
+        <!-- 决策链路 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="16dp"
+            android:layout_marginTop="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="系统决策链路与环境"
+                android:textColor="#94A3B8"
+                android:textSize="11sp"
+                android:textAllCaps="true"
+                android:letterSpacing="0.08" />
+            <TextView
+                android:id="@+id/tvSystemTrace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="#475569"
+                android:textSize="12sp"
+                android:lineSpacingMultiplier="1.6" />
+        </LinearLayout>
+
+        <!-- 存证按钮 -->
+        <Button
+            android:id="@+id/btnGenerateEvidence"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:text="生成可信存证（SHA-256 / 模拟上链）"
+            android:backgroundTint="#4A90E2"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
+
+        <!-- 存证结果 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp">
+            <TextView
+                android:id="@+id/tvEvidence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#64748B"
+                android:textSize="11sp"
+                android:typeface="monospace"
+                android:lineSpacingMultiplier="1.5"
+                android:text="点击上方按钮生成证据包摘要。" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
+
