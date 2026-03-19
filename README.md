@@ -45,7 +45,7 @@
 ---
 ## 📹 演示视频
 
-[在线观看视频] (https://gr3e3n.github.io/CarSafety/video-demo.html)
+[在线观看视频](https://gr3e3n.github.io/CarSafety/video-demo.html)
 
 *👆 点击在线观看演示视频*
 
