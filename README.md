@@ -46,7 +46,7 @@
 ## 演示
 
 演示视频：
-<video src="demo/demo.mp4" controls width="800"></video>
+https://github.com/Gr3e3n/CarSafety/demo/demo.mp4?raw=true
 
 ---
 ## 系统架构
