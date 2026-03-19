@@ -22,23 +22,46 @@
             display: inline-block;
             color: #0366d6;
             text-decoration: none;
+            cursor: pointer;
         }
         .back-link:hover {
             text-decoration: underline;
+        }
+        .note {
+            color: #586069;
+            font-size: 12px;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <h1>项目演示视频</h1>
     
-  <video controls width="100%">
-    <source src="https://gr3e3n.github.io/CarSafety/demo/demo.mp4" type="video/mp4">
-</video>
+    <video controls width="100%">
+        <source src="https://gr3e3n.github.io/CarSafety/demo/demo.mp4" type="video/mp4">
+        您的浏览器不支持视频标签。
+    </video>
+    
+    <p>
+        <a href="#" onclick="openAndClose(); return false;" class="back-link">
+            ← 返回README（自动关闭本页）
+        </a>
+    </p>
+    <p class="note">点击后会在新标签页打开README，并自动关闭当前视频页</p>
 
-    
-     <p><a href="https://github.com/Gr3e3n/CarSafety/blob/main/README.md">← 返回README</a></p>
-    
- 
+    <script>
+    function openAndClose() {
+        // 在新标签页打开README
+        window.open('https://github.com/Gr3e3n/CarSafety', '_blank');
+        
+        // 尝试关闭当前标签页
+        try {
+            window.close();
+        } catch(e) {
+            // 如果浏览器阻止关闭，给用户提示
+            alert('请手动关闭当前标签页，README已在新页面打开');
+        }
+    }
+    </script>
 </body>
 </html>
-
