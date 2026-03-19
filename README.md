@@ -46,10 +46,9 @@
 ## 演示
 
 演示视频：
-<video width="640" height="360" controls>
-  <source src="demo/demo.mp4" type="video/mp4">
-  您的浏览器不支持 HTML5 video 标签。
-</video>
+<video src="demo/demo.mp4" controls width="800"></video>
+
+---
 ## 系统架构
 
 ```
