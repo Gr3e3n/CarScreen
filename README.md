@@ -45,10 +45,13 @@
 ---
 ## 演示
 
+<div align="center">
+  <video src="demo/demo.mp4" controls width="80%" style="max-width: 800px;">
+    <p>您的浏览器不支持视频标签，请<a href="demo/demo.mp4">点击下载</a>查看演示视频。</p>
+  </video>
+</div>
 
-[![点击观看演示视频](demo/demo.png)](demo/demo.mp4)
 
-*👆 点击图片观看视频*
 
 ---
 ## 系统架构
