@@ -45,11 +45,9 @@
 ---
 ## 演示
 
-<div align="center">
-  <video src="demo/demo.mp4" controls width="80%" style="max-width: 800px;">
-    <p>您的浏览器不支持视频标签，请<a href="demo/demo.mp4">点击下载</a>查看演示视频。</p>
-  </video>
-</div>
+<video src="https://github.com/Gr3e3n/CarSafety/raw/main/demo/demo.mp4" controls width="100%">
+  您的浏览器不支持视频标签。
+</video>
 
 
 
