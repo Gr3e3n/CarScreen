@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>视频演示</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        video {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .back-link {
+            margin-top: 20px;
+            display: inline-block;
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>项目演示视频</h1>
+    
+    <video controls>
+        <source src="demo/demo.mp4" type="video/mp4">
+        您的浏览器不支持视频标签。
+    </video>
+    
+    <p>
+        <a href="README.md" class="back-link">← 返回README</a>
+    </p>
+</body>
+</html>
