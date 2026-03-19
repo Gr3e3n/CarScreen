@@ -1,65 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>视频演示</title>
+    <title>视频演示 - CarSafety</title>
     <meta charset="UTF-8">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            text-align: center;
-        }
-        video {
-            width: 100%;
-            max-width: 800px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .back-link {
-            margin-top: 20px;
-            display: inline-block;
-            color: #0366d6;
-            text-decoration: none;
+        body { font-family: Arial; max-width: 800px; margin: 40px auto; padding: 20px; text-align: center; }
+        video { width: 100%; border-radius: 8px; }
+        .close-btn {
+            margin-top: 30px;
+            padding: 12px 24px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
             cursor: pointer;
         }
-        .back-link:hover {
-            text-decoration: underline;
-        }
-        .note {
-            color: #586069;
-            font-size: 12px;
-            margin-top: 10px;
-        }
+        .close-btn:hover { background-color: #c82333; }
+        .note { color: #666; margin-top: 20px; }
     </style>
 </head>
 <body>
-    <h1>项目演示视频</h1>
+    <h1>🚗 CarSafety 演示视频</h1>
     
     <video controls width="100%">
         <source src="https://gr3e3n.github.io/CarSafety/demo/demo.mp4" type="video/mp4">
         您的浏览器不支持视频标签。
     </video>
     
-    <p>
-        <a href="#" onclick="openAndClose(); return false;" class="back-link">
-            ← 返回README（自动关闭本页）
-        </a>
-    </p>
-    <p class="note">点击后会在新标签页打开README，并自动关闭当前视频页</p>
+    <div>
+        <button onclick="closeAndGoBack()" class="close-btn">
+            ✕ 观看完毕，关闭本页并返回README
+        </button>
+    </div>
+    <p class="note">点击后自动切换回原 README 页面，并尝试关闭当前视频页。</p>
 
     <script>
-    function openAndClose() {
-        // 在新标签页打开README
-        window.open('https://github.com/Gr3e3n/CarSafety', '_blank');
+    function closeAndGoBack() {
+        // 让原 README 标签页获得焦点
+        if (window.opener && !window.opener.closed) {
+            window.opener.focus();
+        } else {
+            alert('无法找到原 README 页面，请手动切换。');
+        }
         
-        // 尝试关闭当前标签页
+        // 尝试关闭当前页
         try {
             window.close();
         } catch(e) {
-            // 如果浏览器阻止关闭，给用户提示
-            alert('请手动关闭当前标签页，README已在新页面打开');
+            alert('浏览器阻止了自动关闭，请手动关闭此标签页。');
         }
     }
     </script>
