@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.carscreen.databinding.ActivityAccidentTraceDetailBinding
 import com.example.carscreen.trace.AccidentDetailBundle
 import com.example.carscreen.trace.AccidentTraceViewModel
 import com.example.carscreen.trace.ResponsibilityAnalyzer
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -30,16 +32,31 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
         bundle = viewModel.loadDetail(eventId)
         render(bundle!!)
 
-        binding.btnGenerateEvidence.setOnClickListener {
+        // ── 上链按钮 ──────────────────────────────────────────────────
+        binding.btnUploadChain.setOnClickListener {
             val b = bundle ?: return@setOnClickListener
-            val evidence = viewModel.generateEvidence(b)
-            binding.tvEvidence.text = buildString {
-                append("证据包ID：").append(evidence.evidenceId).append('\n')
-                append("SHA-256：\n").append(evidence.sha256).append('\n')
-                append("时间戳：").append(formatTime(evidence.timestampMillis)).append('\n')
-                append("区块链Tx（模拟）：").append(evidence.blockchainTxId).append('\n')
-                append("数字签名：").append(evidence.signature).append('\n')
-                append("\n说明：当前为模拟上链写入；真实接入时替换为链服务 SDK 调用。")
+
+            // 按钮置灰，防止重复点击；隐藏上次结果
+            binding.btnUploadChain.isEnabled = false
+            binding.btnUploadChain.text = "上链中..."
+            binding.layoutChainSuccess.visibility = View.GONE
+            binding.tvChainError.visibility = View.GONE  // ← 隐藏上次错误
+
+            lifecycleScope.launch {
+                val result = viewModel.uploadToBlockchain(b)
+
+                if (result.success) {
+                    binding.tvChainHash.text = result.hash
+                    binding.tvChainTime.text = formatTime(System.currentTimeMillis())
+                    binding.layoutChainSuccess.visibility = View.VISIBLE
+                    binding.btnUploadChain.text = "已上链 ✓"
+                } else {
+                    binding.tvChainError.setTextColor(getColor(android.R.color.holo_red_dark))
+                    binding.tvChainError.text = "❌ 上链失败：${result.error}"
+                    binding.tvChainError.visibility = View.VISIBLE
+                    binding.btnUploadChain.isEnabled = true
+                    binding.btnUploadChain.text = "重新上链"
+                }
             }
         }
     }
@@ -77,7 +94,6 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
         binding.tvAiInference.text = buildString {
             append(resp.conclusion).append('\n')
         }
-        // 动态调整进度条宽度权重
         setBarWeight(binding.barDriver, resp.driverFactor.toFloat())
         setBarWeight(binding.barSystem, resp.systemFactor.toFloat())
         setBarWeight(binding.barEnv, resp.environmentFactor.toFloat())
@@ -85,7 +101,7 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
         binding.tvBarSystemPct.text = "${resp.systemFactor}%"
         binding.tvBarEnvPct.text = "${resp.environmentFactor}%"
 
-        // ── 驾驶员行为分析文本（来自 ResponsibilityResult.reasons）────
+        // ── 驾驶员行为分析文本 ────────────────────────────────────────
         binding.tvDriverAnalysis.text = resp.reasons.joinToString("\n")
 
         // ── 自动驾驶故障链路与环境 ────────────────────────────────────
@@ -114,56 +130,50 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
     }
 
     private fun renderMetrics(m: ResponsibilityAnalyzer.DetailedMetrics) {
-        // 反应时间
         binding.tvReactionTime.text = if (m.reactionTimeMs >= 0) "${m.reactionTimeMs}ms" else "N/A"
         binding.tvReactionTimeLabel.text = when {
             m.reactionTimeMs >= 2500 -> "过长，风险极高"
             m.reactionTimeMs >= 1500 -> "偏长，需关注"
-            m.reactionTimeMs >= 0 -> "正常"
-            else -> ""
+            m.reactionTimeMs >= 0    -> "正常"
+            else                     -> ""
         }
         binding.tvReactionTimeLabel.setTextColor(
             getColor(when {
                 m.reactionTimeMs >= 2500 -> R.color.warning_red
                 m.reactionTimeMs >= 1500 -> R.color.module_orange
-                else -> R.color.module_teal
+                else                     -> R.color.module_teal
             })
         )
 
-        // 制动上升时间
         binding.tvBrakeRiseTime.text = if (m.brakeRiseTimeMs >= 0) "${m.brakeRiseTimeMs}ms" else "未达"
         binding.tvBrakeRiseLabel.text = when {
-            m.brakeRiseTimeMs < 0 -> "未达全力制动"
+            m.brakeRiseTimeMs < 0    -> "未达全力制动"
             m.brakeRiseTimeMs <= 400 -> "制动果断"
-            else -> "上升偏慢"
+            else                     -> "上升偏慢"
         }
 
-        // 峰值减速度
         binding.tvMaxDecel.text = String.format(Locale.getDefault(), "%.1f", m.maxDecelerationMS2)
         binding.tvMaxDecelLabel.text = when {
             m.maxDecelerationMS2 <= -8f -> "碰撞级"
             m.maxDecelerationMS2 <= -5f -> "强制动"
-            else -> "中等"
+            else                        -> "中等"
         }
 
-        // AEB 介入
         binding.tvAebDelay.text = if (m.aebDelayMs != -1) "${m.aebDelayMs}ms" else "未触发"
         binding.tvAebLabel.text = if (m.aebDelayMs != -1) "相对事故时刻" else "系统未介入"
         binding.tvAebDelay.setTextColor(
             getColor(if (m.aebDelayMs != -1) R.color.module_teal else R.color.warning_red)
         )
 
-        // TTC
         binding.tvTtc.text = if (m.ttcAtBrakeStart >= 0f) {
             String.format(Locale.getDefault(), "%.1fs", m.ttcAtBrakeStart)
         } else "N/A"
         binding.tvTtcLabel.text = when {
             m.ttcAtBrakeStart in 0f..1.5f -> "跟车时距不足"
-            m.ttcAtBrakeStart > 1.5f -> "时距尚可"
-            else -> "不可用"
+            m.ttcAtBrakeStart > 1.5f      -> "时距尚可"
+            else                          -> "不可用"
         }
 
-        // 制动有效性
         binding.tvBrakeEffective.text = if (m.brakeEffective) "有效" else "不足"
         binding.tvBrakeEffective.setTextColor(
             getColor(if (m.brakeEffective) R.color.module_teal else R.color.warning_red)

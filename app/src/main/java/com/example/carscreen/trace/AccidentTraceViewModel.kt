@@ -30,4 +30,8 @@ class AccidentTraceViewModel(app: Application) : AndroidViewModel(app) {
         aebTriggerTMs: Int? = null,
     ): ResponsibilityAnalyzer.DetailedMetrics =
         ResponsibilityAnalyzer.analyze(bundle.event, bundle.telemetry10sBefore, aebTriggerTMs)
+
+    /** ↓ 新增：上链存证，返回结果 */
+    suspend fun uploadToBlockchain(bundle: AccidentDetailBundle): BlockchainApi.UploadResult =
+        BlockchainApi.uploadAccident(bundle)
 }
