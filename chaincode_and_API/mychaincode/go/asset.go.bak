@@ -1,0 +1,62 @@
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+
+    "github.com/hyperledger/fabric-contract-api-go/contractapi"
+)
+
+// SmartContract 定义合约结构
+type SmartContract struct {
+    contractapi.Contract
+}
+
+// Asset 定义我们要存储的数据结构
+type Asset struct {
+    Key   string `json:"key"`
+    Value string `json:"value"`
+}
+
+// CreateAsset 上传数据 (写入账本)
+func (s *SmartContract) CreateAsset(ctx contractapi.TransactionContextInterface, key string, value string) error {
+    asset := Asset{Key: key, Value: value}
+    assetJSON, err := json.Marshal(asset)
+    if err != nil {
+        return err
+    }
+    return ctx.GetStub().PutState(key, assetJSON)
+}
+
+// ReadAsset 读取数据 (查询账本)
+func (s *SmartContract) ReadAsset(ctx contractapi.TransactionContextInterface, key string) (*Asset, error) {
+    assetJSON, err := ctx.GetStub().GetState(key)
+    if err != nil {
+        return nil, fmt.Errorf("failed to read from world state: %v", err)
+    }
+    if assetJSON == nil {
+        return nil, fmt.Errorf("the asset %s does not exist", key)
+    }
+
+    var asset Asset
+    err = json.Unmarshal(assetJSON, &asset)
+    if err != nil {
+        return nil, err
+    }
+
+    return &asset, nil
+}
+
+// main 函数启动链码
+func main() {
+    chaincode, err := contractapi.NewChaincode(&SmartContract{})
+    if err != nil {
+        fmt.Printf("Error creating asset chaincode: %s", err.Error())
+        return
+    }
+
+    if err := chaincode.Start(); err != nil {
+        fmt.Printf("Error starting asset chaincode: %s", err.Error())
+    }
+}
+
