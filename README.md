@@ -254,6 +254,11 @@ triggerCapture()
 
 ### 可信区块链存证
 
+本节功能由链码与 API 子模块支持，详细说明请参考：
+
+- **[链码与 API 子模块](https://github.com/Gr3e3n/CarScreen/tree/main/chaincode_and_API)**  
+  模块 README ➝ **[chaincode_and_API/README.md](https://github.com/Gr3e3n/CarScreen/blob/main/chaincode_and_API/README.md)**
+
 #### 存证生成流程
 
 ```
